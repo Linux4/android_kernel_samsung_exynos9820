@@ -300,6 +300,8 @@ extern long strnlen_unsafe_user(const void __user *unsafe_addr, long count);
 #endif
 
 #ifdef CONFIG_HARDENED_USERCOPY
+void usercopy_warn(const char *name, const char *detail, bool to_user,
+		   unsigned long offset, unsigned long len);
 void __noreturn usercopy_abort(const char *name, const char *detail,
 			       bool to_user, unsigned long offset,
 			       unsigned long len);
