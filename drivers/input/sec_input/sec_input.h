@@ -225,6 +225,8 @@ typedef enum {
 #define TSP_EXTERNAL_FW_SIGNED	"tsp_signed.bin"
 #define TSP_SPU_FW_SIGNED		"/TSP/ffu_tsp.bin"
 
+#define SEC_TS_PRESSURE_MAX				0x3f
+
 enum power_mode {
 	SEC_INPUT_STATE_POWER_OFF = 0,
 	SEC_INPUT_STATE_LPM,

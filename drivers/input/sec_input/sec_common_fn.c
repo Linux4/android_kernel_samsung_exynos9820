@@ -733,7 +733,7 @@ static void sec_input_set_prop(struct i2c_client *client, struct input_dev *dev,
 	input_set_abs_params(dev, ABS_MT_TOUCH_MAJOR, 0, 255, 0, 0);
 	input_set_abs_params(dev, ABS_MT_TOUCH_MINOR, 0, 255, 0, 0);
 	if (pdata->support_mt_pressure)
-		input_set_abs_params(dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
+		input_set_abs_params(dev, ABS_MT_PRESSURE, 0, SEC_TS_PRESSURE_MAX, 0, 0);
 
 	if (propbit == INPUT_PROP_POINTER)
 		input_mt_init_slots(dev, SEC_TS_SUPPORT_TOUCH_COUNT, INPUT_MT_POINTER);
@@ -1047,9 +1047,7 @@ int sec_input_parse_dt(struct i2c_client *client)
 	of_property_read_u32(np, "sec,ss_touch_num", &pdata->ss_touch_num);
 	input_err(true, dev, "%s: ss_touch_num:%d\n", __func__, pdata->ss_touch_num);
 #endif
-#if IS_ENABLED(CONFIG_SEC_FACTORY)
 	pdata->support_mt_pressure = true;
-#endif
 	input_err(true, &client->dev, "%s: i2c buffer limit: %d, lcd_id:%06X, bringup:%d,"
 			" id:%d,%d, dex:%d, max(%d/%d), FOD:%d, AOT:%d, ED:%d FLM:%d\n",
 			__func__, pdata->i2c_burstmax, lcdtype, pdata->bringup,

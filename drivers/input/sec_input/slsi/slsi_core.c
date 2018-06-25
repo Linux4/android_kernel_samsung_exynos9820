@@ -864,7 +864,7 @@ static void slsi_ts_coord_parsing(struct slsi_ts_data *ts, struct slsi_ts_event_
 	ts->plat_data->coord[t_id].action = p_event_coord->tchsta;
 	ts->plat_data->coord[t_id].x = (p_event_coord->x_11_4 << 4) | (p_event_coord->x_3_0);
 	ts->plat_data->coord[t_id].y = (p_event_coord->y_11_4 << 4) | (p_event_coord->y_3_0);
-	ts->plat_data->coord[t_id].z = p_event_coord->z & 0x3F;
+	ts->plat_data->coord[t_id].z = p_event_coord->z & SEC_TS_PRESSURE_MAX;
 	ts->plat_data->coord[t_id].ttype = p_event_coord->ttype_3_2 << 2 | p_event_coord->ttype_1_0 << 0;
 	ts->plat_data->coord[t_id].major = p_event_coord->major;
 	ts->plat_data->coord[t_id].minor = p_event_coord->minor;
