@@ -456,7 +456,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
 #ifdef CONFIG_FSCRYPT_SDP
 	sdp_fs_command_t *cmd = NULL;
 #endif
-	if (inode->i_crypt_info) {
+	if (fscrypt_has_encryption_key(inode)) {
 #ifdef CONFIG_DDAR
 		if (fscrypt_dd_encrypted_inode(inode) && fscrypt_dd_is_locked()) {
 			dd_error("Failed to open a DDAR-protected file in lock state (ino:%ld)\n", inode->i_ino);
@@ -637,7 +637,7 @@ attach_ci:
 		crypt_info->ci_dd_info = di;
 	}
 #endif
-	if (cmpxchg(&inode->i_crypt_info, NULL, crypt_info) == NULL)
+	if (cmpxchg_release(&inode->i_crypt_info, NULL, crypt_info) == NULL)
 		crypt_info = NULL;
 #ifdef CONFIG_FSCRYPT_SDP
 	if (crypt_info == NULL) //Call only when i_crypt_info is loaded initially
