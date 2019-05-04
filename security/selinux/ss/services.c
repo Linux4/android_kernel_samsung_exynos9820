@@ -679,9 +679,7 @@ static void context_struct_compute_av(struct context *scontext,
 	avkey.target_class = tclass;
 	avkey.specified = AVTAB_AV | AVTAB_XPERMS;
 	sattr = &policydb.type_attr_map_array[scontext->type - 1];
-	BUG_ON(!sattr);
 	tattr = &policydb.type_attr_map_array[tcontext->type - 1];
-	BUG_ON(!tattr);
 	ebitmap_for_each_positive_bit(sattr, snode, i) {
 		ebitmap_for_each_positive_bit(tattr, tnode, j) {
 			avkey.source_type = i + 1;
@@ -1069,9 +1067,7 @@ void security_compute_xperms_decision(u32 ssid,
 	avkey.target_class = tclass;
 	avkey.specified = AVTAB_XPERMS;
 	sattr = &policydb.type_attr_map_array[scontext->type - 1];
-	BUG_ON(!sattr);
 	tattr = &policydb.type_attr_map_array[tcontext->type - 1];
-	BUG_ON(!tattr);
 	ebitmap_for_each_positive_bit(sattr, snode, i) {
 		ebitmap_for_each_positive_bit(tattr, tnode, j) {
 			avkey.source_type = i + 1;
