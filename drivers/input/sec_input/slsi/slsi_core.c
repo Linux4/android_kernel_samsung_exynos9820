@@ -12,6 +12,11 @@
 #include "slsi_dev.h"
 #include "slsi_reg.h"
 
+#ifdef CONFIG_FB
+#include <linux/notifier.h>
+#include <linux/fb.h>
+#endif
+
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
 struct slsi_ts_data* ts_current;
 #endif
@@ -227,6 +232,39 @@ static struct attribute *secure_attr[] = {
 static struct attribute_group secure_attr_group = {
 	.attrs = secure_attr,
 };
+#endif
+
+#ifdef CONFIG_FB
+static int fb_notifier_callback(struct notifier_block *self,
+				unsigned long event,
+				void *data)
+{
+	struct fb_event *evdata = data;
+	struct slsi_ts_data *tc_data = container_of(self, struct slsi_ts_data, fb_notif);
+
+	// Only run for internal screen (fb0)
+	if (evdata && evdata->info->node != 0) return 0;
+
+	if (evdata && evdata->data && event == FB_EVENT_BLANK) {
+		int *blank = evdata->data;
+		switch (*blank) {
+		case FB_BLANK_UNBLANK:
+		case FB_BLANK_NORMAL:
+		case FB_BLANK_VSYNC_SUSPEND:
+		case FB_BLANK_HSYNC_SUSPEND:
+		        slsi_ts_input_open(tc_data->plat_data->input_dev);
+			break;
+		case FB_BLANK_POWERDOWN:
+		        slsi_ts_input_close(tc_data->plat_data->input_dev);
+			break;
+		default:
+			/* Don't handle what we don't understand */
+			break;
+		}
+	}
+
+	return 0;
+}
 #endif
 
 #if IS_ENABLED(CONFIG_SAMSUNG_TUI)
@@ -1635,6 +1673,12 @@ void slsi_ts_release(struct i2c_client *client)
 	regulator_put(ts->plat_data->avdd);
 }
 
+#ifdef CONFIG_FB
+static int fb_notifier_callback(struct notifier_block *self,
+				unsigned long event,
+				void *data);
+#endif
+
 int slsi_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	struct slsi_ts_data *ts;
@@ -1689,6 +1733,12 @@ int slsi_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	sec_input_register_notify(&ts->slsi_input_nb, slsi_touch_notify_call, 1);
 #endif
 
+#ifdef CONFIG_FB
+	ts->fb_notif.notifier_call = fb_notifier_callback;
+	if (fb_register_client(&ts->fb_notif))
+		pr_err("%s: could not create fb notifier\n", __func__);
+#endif
+
 	input_err(true, &ts->client->dev, "%s: done\n", __func__);
 	input_log_fix();
 
@@ -1712,6 +1762,10 @@ int slsi_ts_remove(struct i2c_client *client)
 	free_irq(ts->client->irq, ts);
 
 	slsi_ts_release(client);
+
+#ifdef CONFIG_FB
+	fb_unregister_client(&ts->fb_notif);
+#endif
 
 	return 0;
 }

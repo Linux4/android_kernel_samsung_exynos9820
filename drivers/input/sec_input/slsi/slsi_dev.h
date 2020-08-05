@@ -343,6 +343,10 @@ struct slsi_ts_data {
 	int (*slsi_ts_i2c_read_bulk)(struct slsi_ts_data *ts, u8 *data, int len);
 	int (*slsi_ts_read_sponge)(struct slsi_ts_data *ts, u8 *data, int len);
 	int (*slsi_ts_write_sponge)(struct slsi_ts_data *ts, u8 *data, int len);
+
+#ifdef CONFIG_FB
+	struct notifier_block fb_notif;
+#endif
 };
 
 typedef struct {
