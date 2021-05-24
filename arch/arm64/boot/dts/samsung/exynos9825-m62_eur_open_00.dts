@@ -1271,8 +1271,7 @@
 					phandle = <0x8a>;
 
 					vbmeta {
-						compatible = "android,vbmeta";
-						parts = "vbmeta,boot,system,vendor,product,odm,prism,optics,vbmeta_system,recovery,dtbo,keystorage";
+						status = "disabled";
 					};
 				};
 			};
