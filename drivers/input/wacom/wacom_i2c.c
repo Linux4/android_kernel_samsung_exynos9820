@@ -1634,6 +1634,8 @@ static irqreturn_t wacom_interrupt_pdct(int irq, void *dev_id)
 
 		if (wac_i2c->function_result & EPEN_EVENT_PEN_OUT)
 			wac_i2c->pen_out_count++;
+		else
+			start_epen_ble_charging(wac_i2c);
 
 		if (wac_i2c->epen_blocked ||
 		    (wac_i2c->battery_saving_mode && !(wac_i2c->function_result & EPEN_EVENT_PEN_OUT))) {
@@ -1680,9 +1682,10 @@ static void pen_insert_work(struct work_struct *work)
 		input_info(true, &wac_i2c->client->dev, "%s: pdct(%d)\n",
 			   __func__, wac_i2c->pen_pdct);
 
-		if (wac_i2c->pen_pdct)
+		if (wac_i2c->pen_pdct) {
 			wac_i2c->function_result &= ~EPEN_EVENT_PEN_OUT;
-		else
+			start_epen_ble_charging(wac_i2c);
+		} else
 			wac_i2c->function_result |= EPEN_EVENT_PEN_OUT;
 	}
 
