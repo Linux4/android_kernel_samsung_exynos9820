@@ -703,6 +703,18 @@ config SENSORS_SSP_DAVINCI
 	  To compile this driver as a module, choose M here: the
 	  module will be called ssp.
 
+config SENSORS_SSP_F62
+        tristate "F62 Project"
+        default n
+        depends on SPI
+        help
+          Binary file for ssp driver.
+          If you say yes here you get F62 project support for
+
+          factory test.
+          To compile this driver as a module, choose M here: the
+          module will be called ssp.
+
 config SENSORS_SSP_LUGE
 	tristate "DREAM Project"
 	default n
