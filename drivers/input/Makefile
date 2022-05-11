@@ -43,3 +43,4 @@ obj-$(CONFIG_CERTIFY_HALL)	+= certify_hall.o
 obj-$(CONFIG_RMI4_CORE)		+= rmi4/
 
 obj-$(CONFIG_INPUT_WACOM)	+= wacom/
+obj-$(CONFIG_INPUT_SEC_INPUT)	+= sec_input/
