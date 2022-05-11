@@ -266,6 +266,18 @@ config SND_SOC_SAMSUNG_EXYNOS9820_MADERA
 	select EXTCON_MADERA_INPUT_EVENT
 	select GPIO_MADERA
 
+config SND_SOC_SAMSUNG_F62_MADERA
+	tristate "Madera audio codec support on exynos9820"
+	select SND_SOC_CS47L92
+	select MFD_MADERA_SPI
+	select MFD_CS47L92
+	select REGULATOR_ARIZONA_LDO1
+	select REGULATOR_ARIZONA_MICSUPP
+	select EXTCON_MADERA
+	select EXTCON_MADERA_INPUT_EVENT
+	select GPIO_MADERA
+	select SND_SOC_SAMSUNG_SYSFS_EARJACK
+
 config SND_SOC_SAMSUNG_BEYOND_MADERA
 	tristate "Madera audio codec support on beyond project"
 	select SND_SOC_CS47L92
