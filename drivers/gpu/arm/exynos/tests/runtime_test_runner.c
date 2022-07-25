@@ -31,7 +31,7 @@ enum test_modules { GPEX_CLOCK = 0, GPEX_CLOCK_SYSFS, GPEX_PM, GPEX_TEST_MODULE_
 static char *test_module_name[GPEX_TEST_MODULE_CNT];
 static uint64_t final_test_result = -1;
 
-static int run_tests_gpex_clock()
+static int run_tests_gpex_clock(void)
 {
 	int result = 0;
 	int min_level, max_level, avg_level, avg_clock;
@@ -69,7 +69,7 @@ static int run_tests_gpex_clock()
 	return 0;
 }
 
-static int run_tests_gpex_pm_state()
+static int run_tests_gpex_pm_state(void)
 {
 	int result = 0;
 
@@ -84,7 +84,7 @@ static int run_tests_gpex_pm_state()
 	return 0;
 }
 
-static int run_tests_clock_sysfs_all()
+static int run_tests_clock_sysfs_all(void)
 {
 	return clock_sysfs_tests_run_all();
 }
@@ -143,7 +143,7 @@ static ssize_t run_runtime_tests(const char *buf, size_t count)
 CREATE_SYSFS_DEVICE_WRITE_FUNCTION(run_runtime_tests)
 CREATE_SYSFS_KOBJECT_WRITE_FUNCTION(run_runtime_tests)
 
-int runtime_test_runner_init()
+int runtime_test_runner_init(void)
 {
 	test_module_name[GPEX_CLOCK] = "gpex clock";
 	test_module_name[GPEX_CLOCK_SYSFS] = "gpex clock sysfs";
@@ -156,7 +156,7 @@ int runtime_test_runner_init()
 	return 0;
 }
 
-void runtime_test_runner_term()
+void runtime_test_runner_term(void)
 {
 	return;
 }

@@ -142,7 +142,7 @@ int test_set_clock(void)
 	return 0;
 }
 
-int clock_sysfs_tests_run_all()
+int clock_sysfs_tests_run_all(void)
 {
 	int idx, result = 0;
 	int policy_count;
