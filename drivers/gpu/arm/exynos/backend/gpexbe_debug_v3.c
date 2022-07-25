@@ -45,14 +45,14 @@ void gpexbe_debug_dbg_snapshot_freq_out(int freq_before, int freq_after)
 		dbg_snapshot_freq(dbg_info.dss_freq_id, freq_before, freq_after, DSS_FLAG_OUT);
 }
 
-int gpexbe_debug_init()
+int gpexbe_debug_init(void)
 {
 	dbg_info.dss_freq_id = dbg_snapshot_get_freq_idx("G3D");
 
 	return 0;
 }
 
-void gpexbe_debug_term()
+void gpexbe_debug_term(void)
 {
 	dbg_info.dss_freq_id = 0;
 }

@@ -96,7 +96,7 @@ struct exynos_context *gpex_platform_init(struct device **dev)
 	return &platform;
 }
 
-void gpex_platform_term()
+void gpex_platform_term(void)
 {
 	runtime_test_runner_term();
 
