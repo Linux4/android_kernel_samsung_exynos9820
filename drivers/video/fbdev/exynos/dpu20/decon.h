@@ -580,6 +580,15 @@ struct dpu_size_info {
 	u32 h_out;
 };
 
+struct decon_display_mode {
+	uint32_t index;
+	uint32_t width;
+	uint32_t height;
+	uint32_t mm_width;
+	uint32_t mm_height;
+	uint32_t fps;
+};
+
 /**
  * Display Subsystem event management status.
  *
@@ -1934,6 +1943,11 @@ int _decon_enable(struct decon_device *decon, enum decon_state state);
 #define EXYNOS_GET_COLOR_MODE_NUM	_IOW('F', 600, __u32)
 #define EXYNOS_GET_COLOR_MODE		_IOW('F', 601, struct decon_color_mode_info)
 #define EXYNOS_SET_COLOR_MODE		_IOW('F', 602, __u32)
+
+/* Display mode */
+#define EXYNOS_GET_DISPLAY_MODE_NUM	_IOW('F', 700, u32)
+#define EXYNOS_GET_DISPLAY_MODE		_IOW('F', 701, struct decon_display_mode)
+#define EXYNOS_SET_DISPLAY_MODE		_IOW('F', 702, struct decon_display_mode)
 
 #if defined(CONFIG_EXYNOS_COMMON_PANEL)
 #define V4L2_EVENT_DECON                (V4L2_EVENT_PRIVATE_START + 1000)
