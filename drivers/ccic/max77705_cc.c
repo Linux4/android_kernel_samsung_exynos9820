@@ -197,10 +197,12 @@ void max77705_notify_dr_status(struct max77705_usbc_platform_data *usbpd_data, u
 		attach ? "ATTACHED":"DETACHED");
 
 	if (attach == CCIC_NOTIFY_ATTACH) {
+#if 0
 		if (usbpd_data->current_connstat == WATER) {
 			pr_info("%s: blocked by WATER\n", __func__);
 			return;
 		}
+#endif
 		if (pd_data->current_dr == UFP) {
 			if (usbpd_data->is_host == HOST_ON) {
 				msg_maxim("pd_state:%02d,	turn off host",
@@ -334,6 +336,7 @@ static irqreturn_t max77705_vconnsc_irq(int irq, void *data)
 	connstat = (cc_data->cc_status1 & BIT_ConnStat)
 				>> FFS(BIT_ConnStat);
 
+#if 0
 	switch (connstat) {
 	case DRY:
 		msg_maxim("== WATER RUN-DRY DETECT ==");
@@ -369,6 +372,7 @@ static irqreturn_t max77705_vconnsc_irq(int irq, void *data)
 		break;
 
 	}
+#endif
 
 	pr_debug("%s: IRQ(%d)_OUT\n", __func__, irq);
 
@@ -854,8 +858,8 @@ int max77705_cc_init(struct max77705_usbc_platform_data *usbc_data)
 	/* check CC Pin state for cable attach booting scenario */
 	max77705_ccstat_irq_handler(usbc_data, CCIC_IRQ_INIT_DETECT);
 	max77705_read_reg(usbc_data->muic, REG_CC_STATUS1, &cc_data->cc_status1);
-	usbc_data->current_connstat = (cc_data->cc_status1 & BIT_ConnStat)
-				>> FFS(BIT_ConnStat);
+	usbc_data->current_connstat = 0;//(cc_data->cc_status1 & BIT_ConnStat)
+				//>> FFS(BIT_ConnStat);
 	pr_info("%s: water state : %s\n", __func__, usbc_data->current_connstat ? "WATER" : "DRY");
 
 	if (usbc_data->current_connstat) {

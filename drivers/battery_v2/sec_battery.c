@@ -7423,7 +7423,6 @@ static int usb_typec_handle_notification(struct notifier_block *nb,
 
 	mutex_lock(&battery->typec_notylock);
 	switch (usb_typec_info.id) {
-	case CCIC_NOTIFY_ID_WATER:
 	case CCIC_NOTIFY_ID_ATTACH:
 		switch (usb_typec_info.attach) {
 		case MUIC_NOTIFY_CMD_DETACH:
@@ -7736,6 +7735,7 @@ skip_cable_check:
 		(battery->muic_cable_type == ATTACHED_DEV_UNDEFINED_RANGE_MUIC ? BATT_MISC_EVENT_UNDEFINED_RANGE_TYPE : 0),
 		BATT_MISC_EVENT_UNDEFINED_RANGE_TYPE);
 
+#if 0
 	if (battery->muic_cable_type == ATTACHED_DEV_HICCUP_MUIC) {
 		if (battery->usb_temp_flag || (battery->misc_event & BATT_MISC_EVENT_TEMP_HICCUP_TYPE)) {
 			pr_info("%s: Hiccup Set because of USB Temp\n", __func__);
@@ -7758,6 +7758,7 @@ skip_cable_check:
 			queue_delayed_work(battery->monitor_wqueue, &battery->monitor_work, 0);
 		}
 	}
+#endif
 
 	/* showing charging icon and noti(no sound, vi, haptic) only
 	   if slow insertion is detected by MUIC */
@@ -7958,6 +7959,7 @@ static int batt_handle_notification(struct notifier_block *nb,
 		(battery->muic_cable_type == ATTACHED_DEV_UNDEFINED_RANGE_MUIC ? BATT_MISC_EVENT_UNDEFINED_RANGE_TYPE : 0),
 		BATT_MISC_EVENT_UNDEFINED_RANGE_TYPE);
 
+#if 0
 	if (battery->muic_cable_type == ATTACHED_DEV_HICCUP_MUIC) {
 		if (battery->usb_temp_flag || (battery->misc_event & BATT_MISC_EVENT_TEMP_HICCUP_TYPE)) {
 			pr_info("%s: Hiccup Set because of USB Temp\n", __func__);
@@ -7975,6 +7977,7 @@ static int batt_handle_notification(struct notifier_block *nb,
 			queue_delayed_work(battery->monitor_wqueue, &battery->monitor_work, 0);
 		}
 	}
+#endif
 
 #if defined(CONFIG_CCIC_NOTIFIER)
 	/* If PD cable is already attached, return this function */
