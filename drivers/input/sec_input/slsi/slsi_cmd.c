@@ -237,9 +237,6 @@ static ssize_t get_lp_dump(struct device *dev, struct device_attribute *attr, ch
 				snprintf(ibuff, sizeof(ibuff), "%03d: %04x%04x%04x%04x%04x\n",
 						i + (ts->sponge_dump_event * dump_area),
 						edata[0], edata[1], edata[2], edata[3], edata[4]);
-#if IS_ENABLED(CONFIG_SEC_DEBUG_TSP_LOG)
-				sec_tsp_sponge_log(ibuff);
-#endif
 			}
 		}
 
@@ -938,7 +935,7 @@ static void slsi_ts_print_channel(struct slsi_ts_data *ts)
 	for (i = 0; i < (ts->tx_count + ts->rx_count) * 2; i += 2) {
 		if (j == ts->tx_count) {
 			input_raw_info(true, &ts->client->dev, "%s\n", pStr);
-			input_raw_info(true, &ts->client->dev, "\n");
+			input_raw_info(true, &ts->client->dev, "%s", "\n");
 			memset(pStr, 0x0, 7 * (ts->tx_count + 1));
 			snprintf(pTmp, sizeof(pTmp), " RX");
 			strlcat(pStr, pTmp, 7 * (ts->tx_count + 1));

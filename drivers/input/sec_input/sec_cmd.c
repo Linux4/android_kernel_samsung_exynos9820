@@ -9,9 +9,10 @@
  *
  */
 
+#include <linux/sec_debug.h>
+
 #include "sec_cmd.h"
 #include "sec_input.h"
-#include "sec_tsp_log.h"
 
 struct class *tsp_sec_class;
 

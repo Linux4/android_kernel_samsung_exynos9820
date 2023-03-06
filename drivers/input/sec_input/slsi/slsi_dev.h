@@ -22,6 +22,7 @@
 #include <linux/i2c.h>
 #include <linux/input.h>
 #include <linux/input/mt.h>
+#include <linux/input/sec_tclm_v2.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/irq.h>
@@ -30,6 +31,7 @@
 #include <linux/of_gpio.h>
 #include <linux/platform_device.h>
 #include <linux/regulator/consumer.h>
+#include <linux/sec_debug.h>
 #include <linux/slab.h>
 #include <linux/sysfs.h>
 #include <linux/time.h>
@@ -53,18 +55,15 @@
 #define SECURE_TOUCH_DISABLE	0
 #endif
 
-#include "../sec_tclm_v2.h"
 #if IS_ENABLED(CONFIG_INPUT_TOUCHSCREEN_TCLMV2)
 #define TCLM_CONCEPT
 #endif
 
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
-#include "../sec_tsp_dumpkey.h"
 extern struct tsp_dump_callbacks dump_callbacks;
 #endif
 
 #include "../sec_input.h"
-#include "../sec_tsp_log.h"
 
 #if IS_ENABLED(CONFIG_EXYNOS_DPU30)
 #include <linux/panel_notify.h>

@@ -1031,7 +1031,7 @@ int sec_input_parse_dt(struct i2c_client *client)
 	pdata->support_wireless_tx = of_property_read_bool(np, "support_wireless_tx");
 
 	if (of_property_read_u32_array(np, "sec,area-size", px_zone, 3)) {
-		input_info(true, &client->dev, "Failed to get zone's size\n");
+		input_info(true, &client->dev, "%s", "Failed to get zone's size\n");
 		pdata->area_indicator = 48;
 		pdata->area_navigation = 96;
 		pdata->area_edge = 60;
