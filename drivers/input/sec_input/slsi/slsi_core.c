@@ -12,6 +12,10 @@
 #include "slsi_dev.h"
 #include "slsi_reg.h"
 
+#if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
+struct slsi_ts_data* ts_current;
+#endif
+
 #if IS_ENABLED(CONFIG_INPUT_SEC_SECURE_TOUCH)
 irqreturn_t secure_filter_interrupt(struct slsi_ts_data *ts)
 {
@@ -1570,6 +1574,7 @@ static int slsi_ts_init(struct i2c_client *client)
 	sec_secure_touch_register(ts, ts->plat_data->ss_touch_num, &ts->plat_data->input_dev->dev.kobj);
 #endif
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
+	ts_current = ts;
 	dump_callbacks.inform_dump = dump_tsp_log;
 	INIT_DELAYED_WORK(&ts->check_rawdata, slsi_ts_check_rawdata);
 #endif

@@ -13,6 +13,8 @@
 #include "slsi_reg.h"
 
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
+extern struct slsi_ts_data* ts_current;
+
 void slsi_ts_check_rawdata(struct work_struct *work)
 {
 	struct slsi_ts_data *ts = container_of(work, struct slsi_ts_data, check_rawdata.work);
@@ -29,10 +31,8 @@ void slsi_ts_check_rawdata(struct work_struct *work)
 	slsi_ts_run_rawdata_all(ts, true);
 }
 
-void dump_tsp_log(struct device *dev)
+void dump_tsp_log(void)
 {
-	struct slsi_ts_data *ts = dev_get_drvdata(dev);
-
 	pr_info("%s: %s %s: start\n", SLSI_TS_I2C_NAME, SECLOG, __func__);
 
 #if IS_ENABLED(CONFIG_BATTERY_SAMSUNG)
@@ -41,12 +41,12 @@ void dump_tsp_log(struct device *dev)
 		return;
 	}
 #endif
-	if (!ts) {
+	if (!ts_current) {
 		pr_err("%s: %s %s: ignored ## tsp probe fail!!\n", SLSI_TS_I2C_NAME, SECLOG, __func__);
 		return;
 	}
 
-	schedule_delayed_work(&ts->check_rawdata, msecs_to_jiffies(100));
+	schedule_delayed_work(&ts_current->check_rawdata, msecs_to_jiffies(100));
 }
 
 void slsi_ts_sponge_dump_flush(struct slsi_ts_data *ts, int dump_area)

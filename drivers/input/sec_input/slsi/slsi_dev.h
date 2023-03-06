@@ -448,7 +448,7 @@ void slsi_ts_input_close(struct input_dev *dev);
 
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_DUMP_MODE)
 void slsi_ts_check_rawdata(struct work_struct *work);
-void dump_tsp_log(struct device *dev);
+void dump_tsp_log(void);
 void slsi_ts_sponge_dump_flush(struct slsi_ts_data *ts, int dump_area);
 #endif
 
