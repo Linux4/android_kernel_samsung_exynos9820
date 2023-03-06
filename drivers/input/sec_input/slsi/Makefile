@@ -9,4 +9,4 @@ else
 endif
 
 ccflags-y += -Wformat
-
+ccflags-$(CONFIG_SAMSUNG_TUI)   += -Idrivers/misc/tui

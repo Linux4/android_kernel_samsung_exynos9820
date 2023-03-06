@@ -42,7 +42,7 @@
 #include <linux/proc_fs.h>
 
 #if IS_ENABLED(CONFIG_SAMSUNG_TUI)
-#include <linux/input/stui_inf.h>
+#include "stui_inf.h"
 #endif
 
 #if IS_ENABLED(CONFIG_INPUT_SEC_SECURE_TOUCH) || IS_ENABLED(CONFIG_INPUT_SEC_SECURE_TOUCH_MODULE)
