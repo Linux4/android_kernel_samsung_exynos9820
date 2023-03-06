@@ -68,6 +68,11 @@ dtbo-y += samsung/exynos9820-d2x_eur_open_18.dtbo
 dtbo-y += samsung/exynos9820-d2x_eur_open_22.dtbo
 dtbo-y += samsung/exynos9820-d2x_eur_open_23.dtbo
 
+dtbo-y += samsung/exynos9825-m62_eur_open_00.dtbo
+dtbo-y += samsung/exynos9825-m62_eur_open_01.dtbo
+dtbo-y += samsung/exynos9825-m62_eur_open_02.dtbo
+dtbo-y += samsung/exynos9825-m62_eur_open_03.dtbo
+
 targets += dtbs
 DTB_LIST  := $(dtb-y) $(dtbo-y)
 always    := $(DTB_LIST)
