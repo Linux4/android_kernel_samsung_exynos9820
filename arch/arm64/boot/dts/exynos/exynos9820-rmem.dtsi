@@ -9,7 +9,7 @@
  * published by the Free Software Foundation.
  */
 
-#include "../../../../../include/generated/autoconf.h"
+#include <generated/autoconf.h>
 #include <dt-bindings/soc/samsung/debug-snapshot-table.h>
 #include <dt-bindings/soc/samsung/exynos9820-seclog.h>
 
@@ -157,7 +157,7 @@
 
 		abox_rmem: abox-rmem {
 			compatible = "exynos,abox_rmem";
-			size = <0x3800000>;
+			size = <0x3c00000>;
 			alloc-ranges = <0x0 0xC0000000 0x20000000>;
 			alignment = <0x0 0x00400000>;
 		};

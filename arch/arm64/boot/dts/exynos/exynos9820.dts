@@ -219,7 +219,7 @@
 		fmp0 = &fmp_0;
 		mfc0 = &mfc_0;
 		scaler0 = &scaler_0;
-        	panel0 = &panel_0;
+		panel0 = &panel_0;
 	};
 
 	ect {
@@ -228,8 +228,7 @@
 	};
 
 	chosen: chosen {
-//		bootargs = "earlycon=exynos4210,0x10440000 console=ttySAC0,115200n8 root=/dev/ram0 rw ramdisk=8192 initrd=0x84000000,8M init=/linuxrc mem=512M clk_ignore_unused";
-	        bootargs = "console=ram bcm_setup=0xffffff80f8e00000 pmic_info=0x3 ccic_info=0x1 firmware_class.path=/vendor/firmware reserve-fimc=0xffffff80fa000000 sec_debug.cp=0 nohugeiomap epx_activate=true";
+	        bootargs = "";
 		linux,initrd-start = <0x84000000>;
 		linux,initrd-end = <0x841FFFFF>;
 	};
@@ -252,37 +251,6 @@
 	firmware {
 		android {
 			compatible = "android,firmware";
-			vbmeta {
-				compatible = "android,vbmeta";
-				parts = "vbmeta,boot,recovery,system,vendor,product,dtb,dtbo,keystorage";
-			};
-			fstab {
-				compatible = "android,fstab";
-				system {
-					compatible = "android,system";
-					dev = "/dev/block/platform/13d60000.ufs/by-name/system";
-					type = "ext4";
-					mnt_flags = "ro";
-					fsmgr_flags = "wait, avb";
-					status = "disabled";
-				};
-				vendor {
-					compatible = "android,vendor";
-					dev = "/dev/block/platform/13d60000.ufs/by-name/vendor";
-					type = "ext4";
-					mnt_flags = "ro";
-					fsmgr_flags = "wait,verify,avb";
-					status = "okay";
-				};
-				product {
-					compatible = "android,product";
-					dev = "/dev/block/platform/13d60000.ufs/by-name/product";
-					type = "ext4";
-					mnt_flags = "ro";
-					fsmgr_flags = "wait,verify,avb";
-					status = "okay";
-				};
-			};
 		};
 	};
 
@@ -3942,13 +3910,15 @@
 	serial_1: uart@10840000 {
 		compatible = "samsung,exynos-uart";
 		samsung,separate-uart-clk;
+		samsung,rts-gpio-control;
+		samsung,rts-trig-level = <1>;
 		reg = <0x0 0x10840000 0x100>;
 		samsung,fifo-size = <256>;
-		samsung,rts-gpio-control;
 		interrupts = <0 INTREQ__UART_BT 0>;
-		pinctrl-names = "default", "rts";
+		pinctrl-names = "default", "rts", "tx_dat";
 		pinctrl-0 = <&uart1_bus_single &uart1_rxd_pull>; /* or _bus_dual */
-		pinctrl-1 = <&uart1_bus_rts &uart1_bus_tx_input>;
+		pinctrl-1 = <&uart1_bus_rts &uart1_bus_tx_con>;
+		pinctrl-2 = <&uart1_bus_tx_dat>;
 		samsung,usi-serial-v2;
 		clocks = <&clock GATE_UART_BT>, <&clock DOUT_CLK_PERIC1_UART_BT>;
 		clock-names = "gate_uart_clk1", "ipclk_uart1";
@@ -4598,6 +4568,8 @@
 			3200 2000 1900 3300 5200 7000 /* yuv2p rotated */
 			2400 1900 1900 2700 3100 4100 /* 8+2 non-rotated */
 			2500 900 900 2200 2900 3700 /* 8+2 rotated */
+			2800 3000 1600 1600 2400 3200 /* afbc non-rotated */
+			2800 3000 1600 1600 2400 3200 /* afbc rotated */
 			2800>; /* colorfill */
 
 		g2d_dvfs_table = <534000 711000
