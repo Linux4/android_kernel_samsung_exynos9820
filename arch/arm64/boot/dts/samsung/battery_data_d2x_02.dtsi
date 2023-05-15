@@ -36,6 +36,7 @@
 				battery,usb_temp_check_type = <3>;
 				battery,chg_temp_check_type = <3>;
 				battery,wpc_temp_check_type = <3>;
+				battery,lrp_temp_check_type = <0>;
 
 				battery,thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */
 				battery,usb_thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */

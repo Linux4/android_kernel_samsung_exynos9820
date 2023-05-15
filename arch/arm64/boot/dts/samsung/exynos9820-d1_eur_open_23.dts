@@ -199,6 +199,7 @@
 		max77705,fw_product_id = <0x03>;
 		support_pd_role_swap;
 		max77705,support-audio;
+		max77705,bc1p2_retry_count = <2>;
 
 		regulators {
 			ESAFEOUT1 {
