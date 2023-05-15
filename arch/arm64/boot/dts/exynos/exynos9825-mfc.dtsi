@@ -13,8 +13,8 @@
  * published by the Free Software Foundation.
  */
 
-#include <dt-bindings/clock/exynos9825.h>
-#include <dt-bindings/interrupt-controller/exynos9825.h>
+#include <dt-bindings/clock/exynos9820.h>
+#include <dt-bindings/interrupt-controller/exynos9820.h>
 
 / {
 	mfc_0: mfc@188D0000 {

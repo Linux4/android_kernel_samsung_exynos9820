@@ -14,9 +14,9 @@
  */
 
 /dts-v1/;
-#include <dt-bindings/clock/exynos9825.h>
+#include <dt-bindings/clock/exynos9820.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
-#include <dt-bindings/interrupt-controller/exynos9825.h>
+#include <dt-bindings/interrupt-controller/exynos9820.h>
 #include <dt-bindings/soc/samsung/exynos-bcm_dbg.h>
 #include <dt-bindings/display/exynos-display.h>
 #include "exynos9825-pinctrl.dtsi"
@@ -24,9 +24,9 @@
 #include "exynos9825-sysmmu.dtsi"
 #include "exynos9825-debug.dtsi"
 #include <dt-bindings/ufs/ufs.h>
-#include <dt-bindings/soc/samsung/exynos9825-dm.h>
+#include <dt-bindings/soc/samsung/exynos9820-dm.h>
 #include "exynos9825-pm-domains.dtsi"
-#include <dt-bindings/soc/samsung/exynos9825-devfreq.h>
+#include <dt-bindings/soc/samsung/exynos9820-devfreq.h>
 #include <dt-bindings/thermal/thermal.h>
 #include <dt-bindings/pci/pci.h>
 #include "exynos9825-camera.dtsi"
@@ -250,25 +250,6 @@
 	firmware {
 		android: android {
 			compatible = "android,firmware";
-			fstab {
-				compatible = "android,fstab";
-				system: system {
-					compatible = "android,system";
-					dev = "/dev/block/platform/13d60000.ufs/by-name/system";
-					type = "ext4";
-					mnt_flags = "ro";
-					fsmgr_flags = "wait";
-					status = "disabled";
-				};
-				vendor: vendor {
-					compatible = "android,vendor";
-					dev = "/dev/block/platform/13d60000.ufs/by-name/vendor";
-					type = "ext4";
-					mnt_flags = "ro";
-					fsmgr_flags = "wait";
-					status = "disabled";
-				};
-			};
 		};
 	};
 
