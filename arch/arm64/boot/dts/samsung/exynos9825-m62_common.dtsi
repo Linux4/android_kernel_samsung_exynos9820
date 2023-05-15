@@ -11,7 +11,7 @@
 
 #include "../exynos/exynos9825-display-lcd.dtsi"
 #include "../exynos/exynos9825-universal9825_if-pmic-max77705.dtsi"
-#include <dt-bindings/clock/exynos9825.h>
+#include <dt-bindings/clock/exynos9820.h>
 #include <dt-bindings/pci/pci.h>
 #include "exynos_gpio_config_macros.dtsi"
 #include "exynos9825-m62_input_common.dtsi"
@@ -31,16 +31,6 @@
 				oscclk {
 					compatible = "samsung,exynos9820-oscclk";
 					clock-frequency = <26000000>;
-				};
-			};
-
-			firmware {
-				android: android {
-					compatible = "android,firmware";
-					vbmeta {
-						compatible = "android,vbmeta";
-						parts = "vbmeta,boot,system,vendor,product,odm,prism,optics,vbmeta_system,recovery,dtbo,keystorage";
-					};
 				};
 			};
 
