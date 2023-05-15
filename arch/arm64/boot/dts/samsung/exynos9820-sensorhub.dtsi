@@ -59,17 +59,6 @@
 	};
 };
 
-&pinctrl_6 {
-		spi17_bus: spi17-bus {
-			samsung,pin-con-pdn = <3>;
-			samsung,pin-pud-pdn = <0>;
-		};
-		spi17_cs_func: spi17-cs-func {
-			samsung,pin-con-pdn = <3>;
-			samsung,pin-pud-pdn = <0>;
-		};
-};
-
 &spi_17 {
 	#address-cells = <1>;
 	#size-cells = <0>;

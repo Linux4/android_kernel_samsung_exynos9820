@@ -17,10 +17,10 @@
 #include "exynos9825-m62_pm_03.dtsi"
 #include "exynos9825-m62_common.dtsi"
 #include "exynos9825-f62_camera_03.dtsi"
-#include "exynos9820-sensorhub.dtsi"
+#include "exynos9825-sensorhub.dtsi"
 #include "exynos9825-f62_grip_00.dtsi"
 #include "exynos9825-f62_abc.dtsi"
-#include "exynos_gpio_config_macros.dtsi"
+#include "exynos9825_gpio_config_macros.dtsi"
 #include "battery_data_f62-r02.dtsi"
 #include "exynos9825-nfc_00.dtsi"
 / {
