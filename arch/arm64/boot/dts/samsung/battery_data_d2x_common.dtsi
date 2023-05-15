@@ -22,7 +22,7 @@
 				charger,direct_charger = "pca9468-charger";
 
 				charger,dchg_min_current = <2000>;
-				charger,dchg_temp_low_threshold = <180>;
+				charger,dchg_temp_low_threshold = <220>;
 				charger,dchg_temp_high_threshold = <410>;
 
 				charger,ta_alert_wa;
@@ -52,6 +52,7 @@
 				battery,chg_temp_check_type = <2>; /* SEC_BATTERY_TEMP_CHECK_TEMP */
 				battery,wpc_temp_check_type = <2>; /* SEC_BATTERY_TEMP_CHECK_TEMP */
 				battery,dchg_temp_check_type = <2>; /* SEC_BATTERY_TEMP_CHECK_TEMP */
+				battery,lrp_temp_check_type = <0>;
 
 				battery,thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */
 				battery,usb_thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */
@@ -214,18 +215,26 @@
 				battery,swelling_low_temp_recov_2nd = <70>;
 				battery,swelling_low_temp_3rd_ctrl;
 				battery,swelling_low_temp_block_3rd = <180>;
-				battery,swelling_low_temp_recov_3rd = <200>;
+				battery,swelling_low_temp_recov_3rd = <190>;
+				battery,swelling_low_temp_4th_ctrl;
+				battery,swelling_low_temp_block_4th = <220>;
+				battery,swelling_low_temp_recov_4th = <230>;
+				battery,swelling_low_temp_5th_ctrl;
+				battery,swelling_low_temp_block_5th = <250>;
+				battery,swelling_low_temp_recov_5th = <260>;
 
 				battery,swelling_low_temp_current = <1000>;	/* 0.24C */
 				battery,swelling_low_temp_current_2nd = <400>;	/* 0.1C */
-				battery,swelling_low_temp_current_3rd = <3000>;	/* 0.72C */
+				battery,swelling_low_temp_current_3rd = <2000>;	/* 0.48C */
+				battery,swelling_low_temp_current_4th = <3000>; /* 0.72C */
+				battery,swelling_low_temp_current_5th = <4100>; /* 1.0C */
 				battery,swelling_low_temp_topoff = <250>;	/* 0.05C */
 				battery,swelling_high_temp_current = <1500>;	/* 0.36C */
 				battery,swelling_high_temp_topoff = <250>;	/* 0.05C */
 				battery,swelling_wc_high_temp_current = <1000>;	/* 0.24C */
 				battery,swelling_wc_low_temp_current = <1000>;	/* 0.24C */
 				battery,swelling_wc_low_temp_current_2nd = <400>;	/* 0.1C */
-				battery,swelling_wc_low_temp_current_3rd = <3000>;	/* 0.72C */
+				battery,swelling_wc_low_temp_current_3rd = <2000>;	/* 0.48C */
 
 				battery,swelling_drop_float_voltage = <4150>;
 				battery,swelling_high_rechg_voltage = <4000>;
@@ -250,11 +259,11 @@
 				battery,siop_hv_wireless_charging_limit_current = <850>;
 				battery,siop_store_hv_wireless_input_limit_current = <450>;
 
-				battery,ttf_hv_charge_current = <3150>;
-				battery,ttf_hv_wireless_charge_current = <1550>;
-				battery,ttf_wireless_charge_current = <950>;
-				battery,ttf_dc25_charge_current = <5200>;
-				battery,ttf_dc45_charge_current = <7000>;
+				battery,ttf_hv_charge_current = <2850>;
+				battery,ttf_hv_wireless_charge_current = <1450>;
+				battery,ttf_wireless_charge_current = <840>;
+				battery,ttf_dc25_charge_current = <5300>;
+				battery,ttf_dc45_charge_current = <6400>;
 
 				battery,rp_current_rp1 = <500>;
 				battery,rp_current_rp2 = <1500>;
@@ -269,6 +278,10 @@
 
 				/* cycle, chg_float_voltage, recharge_condition_vcell, full_condition_vcell, full_condition_soc, step charging condition */
 				battery,age_data = <0 4350 4280 4250 93 45
+						50 4350 4280 4250 93 45
+						100 4340 4270 4240 92 45
+						150 4340 4270 4240 92 45
+						200 4330 4260 4230 92 45
 						300 4330 4260 4230 92 45
 						400 4310 4240 4210 91 45
 						700 4290 4220 4190 90 45
@@ -285,16 +298,32 @@
 				battery,step_charging_type = <0>;
 
 				/* direct step charging option */
-				battery,dc_step_chg_type = <0x6B>; /* origin(0x6B), soc option is temporary removed */
+				battery,dc_step_chg_type = <0xE9>; /* origin(0x6B), soc option is temporary removed */
 				battery,dc_step_chg_charge_power = <22000>;
 				battery,dc_step_chg_step = <3>;
 				battery,dc_step_chg_step_2nd = <0>;
 				battery,dc_step_chg_cond_vol = <4130 4310 4350>; /*<45w 3step> STEP_CHARGING_CONDITION_VOLTAGE */ 
-				battery,dc_step_chg_cond_iin = <2750 1950 0>; /* <45w 3step> STEP_CHARGING_CONDITION_INPUT_CURRENT */
+				battery,dc_step_chg_cond_iin = <2700 1900 0>; /* <45w 3step> STEP_CHARGING_CONDITION_INPUT_CURRENT */
 				battery,dc_step_chg_iin_check_cnt = <3>;
 				battery,dc_step_chg_cond_soc = <30 65 100>; /* <45w 3step> STEP_CHARGING_CONDITION_SOC */
-				battery,dc_step_chg_val_vfloat = <4130 4310 4350>; /* <45w 3step> STEP_CHARGING_CONDITION_FLOAT_VOLTAGE */
-				battery,dc_step_chg_val_iout = <7500 5500 3900>; /* <45w 3step> */
+				battery,dc_step_chg_val_vfloat = <4130 4310 4350
+								4120 4290 4350
+								4110 4270 4340
+								4100 4250 4340
+								4090 4230 4330
+								4080 4230 4330
+								4070 4230 4310
+								4060 4230 4290
+								4050 4230 4240>; /* <45w 3step> STEP_CHARGING_CONDITION_FLOAT_VOLTAGE */
+				battery,dc_step_chg_val_iout = <7400 5400 3800
+								7200 5300 3700
+								7000 5200 3600
+								6800 5100 3500
+								6800 5000 3400
+								6800 4900 3300
+								6800 4800 3200
+								6700 4700 3100
+								6600 4600 3000>; /* <45w 3step> */
 
 				battery,pre_afc_input_current = <500>; /* mA */
 				battery,prepare_ta_delay = <0>; /* msec */
@@ -313,7 +342,7 @@
 				battery,cisd_max_voltage_thr = <4400>; /* battery ovp detection voltage */
 
 				battery,cisd_alg_index = <8>;
-				battery,ignore_cisd_index = <0 640>; /* Do not use BUCK_OFF, DROP_SENSOR*/
+				battery,ignore_cisd_index = <0 0>; /* Do not use BUCK_OFF, DROP_SENSOR*/
 				battery,ignore_cisd_index_d = <0 80>; /* Do not use BUCK_OFF_PER_DAY, DROP_SENSOR_PER_DAY */
 
 				battery,tx_stop_capacity = <30>;
@@ -325,6 +354,8 @@
 				battery,tx_mfc_iout_phone = <1100>;
 				battery,tx_mfc_iout_phone_5v = <300>;
 				battery,tx_mfc_iout_lcd_on = <900>;
+
+				battery,support_unknown_wpcthm;
 
 				io-channels = <&exynos_adc 4>, <&exynos_adc 3>, <&exynos_adc 11>, <&exynos_adc 4>, <&exynos_adc 1>;
 				io-channel-names = "adc-temp", "adc-chg-temp", "adc-in-bat", "adc-wpc-temp", "adc-usb-temp";
@@ -340,7 +371,7 @@
 				fuelgauge,capacity_max = <1000>;
 				fuelgauge,capacity_max_margin = <300>;
 				fuelgauge,capacity_min = <0>;
-				fuelgauge,capacity_calculation_type = <28>;
+				fuelgauge,capacity_calculation_type = <92>;
 				fuelgauge,repeated_fuelalert;
 				fuelgauge,using_temp_compensation;
 				fuelgauge,low_temp_limit = <100>;
@@ -352,103 +383,39 @@
 				fuelgauge,sw_v_empty_recover_voltage = <3480>;
 				fuelgauge,fg_resistor = <5>;
 				fuelgauge,capacity = <0x0686>;
+				/* fullcapnom(=capacity), dPacc, dQacc,  rcomp0, tempco */
+				fuelgauge,fg_reset_wa_data = <0x686 0x3200 0x191 0x24 0x1426>;
 				/*fuelgauge,auto_discharge_en;*/
 				fuelgauge,discharge_temp_threshold = <600>;
 				fuelgauge,discharge_volt_threshold = <4200>;
-				fuelgauge,ttf_capacity = <4300>;
+
+				fuelgauge,lost_soc_trig_soc = <1000>; /* 100.0% */
+				fuelgauge,lost_soc_trig_d_soc = <20>; /* 2% */
+				fuelgauge,lost_soc_trig_scale = <2>; /* 2x */
+				fuelgauge,lost_soc_guarantee_soc = <30>; /* 3.0% */
+				fuelgauge,lost_soc_min_vol = <3200>; /* 3200mV */
+
+				fuelgauge,ttf_capacity = <3750>;
 				fuelgauge,cv_data = <
-					2488	829	1809
-					2409	832	1796
-					2327	837	1769
-					2272	840	1743
-					2182	846	1721
-					2104	850	1690
-					2038	854	1670
-					1950	859	1640
-					1904	861	1622
-					1838	865	1594
-					1797	867	1576
-					1749	870	1560
-					1703	873	1531
-					1683	873	1525
-					1667	875	1515
-					1660	875	1512
-					1653	876	1509
-					1615	878	1502
-					1580	880	1483
-					1553	881	1463
-					1544	882	1458
-					1520	883	1451
-					1477	886	1424
-					1431	888	1409
-					1396	891	1383
-					1347	894	1361
-					1299	896	1332
-					1267	898	1315
-					1231	902	1288
-					1202	904	1263
-					1148	906	1243
-					1109	909	1213
-					1067	911	1185
-					1031	914	1156
-					1013	915	1140
-					975	917	1111
-					961	919	1084
-					921	921	1064
-					892	923	1038
-					887	923	1019
-					863	925	1004
-					833	927	976
-					808	929	946
-					787	930	918
-					780	931	904
-					764	932	895
-					744	934	864
-					730	935	846
-					715	936	828
-					693	937	800
-					681	938	783
-					666	940	752
-					651	941	735
-					640	942	712
-					628	945	697
-					622	946	679
-					618	947	664
-					600	950	646
-					596	951	627
-					589	953	614
-					584	953	601
-					576	956	572
-					577	957	553
-					562	958	535
-					511	968	506
-					505	969	487
-					493	971	464
-					492	972	435
-					484	973	417
-					480	975	398
-					474	976	380
-					470	977	364
-					462	977	355
-					456	978	336
-					452	979	329
-					446	981	303
-					437	982	282
-					429	984	255
-					423	985	242
-					422	986	229
-					414	987	211
-					411	988	199
-					405	989	191
-					397	990	171
-					391	991	140
-					387	992	126
-					384	993	107
-					372	995	84
-					364	997	54
-					356	998	26
-					356	998	13
-					0	1000	0
+					3007	758	2334
+					2628	777	2227
+					2396	793	2132
+					2140	810	2015
+					1800	834	1850
+					1411	856	1602
+					1209	870	1435
+					1000	883	1253
+					871	894	1062
+					734	902	913
+					681	907	795
+					584	922	650
+					531	938	568
+					513	942	483
+					497	953	384
+					428	963	305
+					395	974	213
+					365	994	92
+					316	1000	0
 					>;
 			};
 
@@ -573,7 +540,7 @@
 					vout = <5500>;
 					input_current_limit = <800>;
 					fast_charging_current = <3150>;
-					ttf_charge_current = <3150>;
+					ttf_charge_current = <840>;
 					rx_power = <4500>;
 				};
 				current_group_1 {
@@ -581,7 +548,7 @@
 					vout = <10000>;
 					input_current_limit = <750>;
 					fast_charging_current = <3150>;
-					ttf_charge_current = <1550>;
+					ttf_charge_current = <1450>;
 					rx_power = <7500>;
 				};
 				current_group_2 {
@@ -589,7 +556,7 @@
 					vout = <11000>;
 					input_current_limit = <1100>;
 					fast_charging_current = <3150>;
-					ttf_charge_current = <2350>;
+					ttf_charge_current = <2050>;
 					rx_power = <12000>;
 				};
 				current_group_3 {
@@ -597,7 +564,7 @@
 					vout = <11000>;
 					input_current_limit = <1300>;
 					fast_charging_current = <3150>;
-					ttf_charge_current = <2650>;
+					ttf_charge_current = <2350>;
 					rx_power = <14000>;
 				};
 			};

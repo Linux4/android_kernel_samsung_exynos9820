@@ -204,8 +204,8 @@
 		sx9330,afephph0_reg = <0x3FBB8548>;
 		sx9330,adcfiltph0_reg = <0x0510101D>;
 		sx9330,afeparamsph1_reg = <0x00001E0F>;  /* again : 9.9pF, sampling freq : 200 khz */
-		sx9330,adcfiltph1_reg = <0x00105A15>;    /* threshold : 4050 */
-		sx9330,avgbfilt_reg = <0x60600C00>;   /* AVGPOSFILT : 1/256, AVGNEGFILT : 1/2 */
+		sx9330,adcfiltph1_reg = <0x00104B25>;    /* threshold : 4050 */
+		sx9330,avgbfilt_reg = <0x60600E00>;   /* AVGPOSFILT : 1/256, AVGNEGFILT : 1/2 */
 		sx9330,avgafilt_reg = <0x00000000>;
 		sx9330,advdig3_reg = <0x00000000>;
 		sx9330,advdig4_reg = <0x00000000>;

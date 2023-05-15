@@ -17,8 +17,6 @@
 #include "exynos9820-beyond0lte_if-pmic-max77705.dtsi"
 #include <dt-bindings/clock/exynos9820.h>
 #include <dt-bindings/pci/pci.h>
-#include "exynos9820-bootargs_ext.dtsi"
-#include "exynos9820-beyond0lte_camera.dtsi"
 #include "exynos9820-beyond0lte_common.dtsi"
 #include "exynos9820-beyond0lte_fingerprint_20.dtsi"
 #include "exynos9820-beyond0lte_eur_open_gpio_04.dtsi"

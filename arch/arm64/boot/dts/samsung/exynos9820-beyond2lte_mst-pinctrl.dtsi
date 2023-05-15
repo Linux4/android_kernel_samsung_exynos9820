@@ -10,19 +10,22 @@
  * GNU General Public License for more details.
  */
 
-/ {
-	fragment@model {
-		target-path = "/";
-		__overlay__ {
-			sec-mst{
-				compatible = "sec-mst";
-				sec-mst,mst-pwr-gpio = <&gpg3 5 0>;
-				sec-mst,mst-en-gpio = <&gpp4 5 0>;
-				sec-mst,mst-data-gpio = <&gpp4 4 0>;
+&pinctrl_6 {
+	mst_pwr_en: sec-mst,mst-pwr-gpio {
+		samsung,pins ="gpg3-5";
+		samsung,pin-function = <1>;
+		samsung,pin-pud = <1>;
+	};
 
-				pinctrl-names = "default";
-				pinctrl-0 = <&mst_pwr_en &mst_en &mst_data>;
-			};
-		};
+	mst_en: sec-mst,mst-en-gpio {
+		samsung,pins ="gpp4-5";
+		samsung,pin-function = <1>;
+		samsung,pin-pud = <1>;
+	};
+
+	mst_data: sec-mst,mst-data-gpio {
+		samsung,pins ="gpp4-4";
+		samsung,pin-function = <1>;
+		samsung,pin-pud = <1>;
 	};
 };

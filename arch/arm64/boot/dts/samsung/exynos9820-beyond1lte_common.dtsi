@@ -9,6 +9,8 @@
  * published by the Free Software Foundation.
 */
 #include "exynos9820-beyond2lte_mst.dtsi"
+#include "exynos9820-beyond1lte_camera.dtsi"
+#include "exynos9820-beyond2lte_mst-pinctrl.dtsi"
 #include "exynos9820-beyond1lte_input_common.dtsi"
 #include "exynos9820-inputbooster.dtsi"
 #include "modem-s5000ap-sipc-pdata.dtsi"
@@ -2459,8 +2461,8 @@ expander_reset_active: expander_reset_active {
 		sx9330,afephph0_reg = <0x3FBB8548>;
 		sx9330,adcfiltph0_reg = <0x0510101D>;
 		sx9330,afeparamsph1_reg = <0x0000082F>;  /* again : 3.3pF, sampling freq : 111.11 khz */
-		sx9330,adcfiltph1_reg = <0x0010B115>;    /* threshold : 15665 */
-		sx9330,avgbfilt_reg = <0x60600C00>;   /* AVGPOSFILT : 1/256, AVGNEGFILT : 1/2 */
+		sx9330,adcfiltph1_reg = <0x00104b25>;    /* threshold : 15665 */
+		sx9330,avgbfilt_reg = <0x60600E00>;   /* AVGPOSFILT : 1/256, AVGNEGFILT : 1/2 */
 		sx9330,avgafilt_reg = <0x00000000>;
 		sx9330,advdig3_reg = <0x00000000>;
 		sx9330,advdig4_reg = <0x00000000>;
@@ -2625,7 +2627,7 @@ expander_reset_active: expander_reset_active {
 	};
 	ext_bin_16: ext-bin@10 {
 		status = "okay";
-		samsung,name = "APDVTX_AUDIO_SLSI.bin";
+		samsung,name = "APTV_AUDIO_SLSI.bin";
 		samsung,area = <1>;
 		samsung,offset = <0x7b6000>;
 	};
@@ -2634,6 +2636,12 @@ expander_reset_active: expander_reset_active {
 		samsung,name = "APSV_AUDIO_SLSI.bin";
 		samsung,area = <1>;
 		samsung,offset = <0x7bc000>;
+	};
+	ext_bin_18: ext-bin@12 {
+		status = "okay";
+		samsung,name = "txse3.bin";
+		samsung,area = <1>;
+		samsung,offset = <0x1800000>;
 	};
 };
 

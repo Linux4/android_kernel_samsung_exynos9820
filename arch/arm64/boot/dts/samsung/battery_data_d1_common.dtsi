@@ -52,6 +52,7 @@
 				battery,chg_temp_check_type = <2>; /* SEC_BATTERY_TEMP_CHECK_TEMP */
 				battery,wpc_temp_check_type = <2>; /* SEC_BATTERY_TEMP_CHECK_TEMP */
 				battery,dchg_temp_check_type = <0>; /* SEC_BATTERY_TEMP_CHECK_NONE for test */
+				battery,lrp_temp_check_type = <0>;
 
 				battery,thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */
 				battery,usb_thermal_source = <2>; /* SEC_BATTERY_THERMAL_SOURCE_ADC */
@@ -246,10 +247,10 @@
 				battery,siop_hv_wireless_charging_limit_current = <850>;
 				battery,siop_store_hv_wireless_input_limit_current = <450>;
 
-				battery,ttf_hv_charge_current = <2700>;
-				battery,ttf_hv_wireless_charge_current = <1375>;
-				battery,ttf_wireless_charge_current = <910>;
-				battery,ttf_dc25_charge_current = <3200>;
+				battery,ttf_hv_charge_current = <2550>;
+				battery,ttf_hv_wireless_charge_current = <1250>;
+				battery,ttf_wireless_charge_current = <860>;
+				battery,ttf_dc25_charge_current = <2700>;
 
 				battery,rp_current_rp1 = <500>;
 				battery,rp_current_rp2 = <1500>;
@@ -312,7 +313,7 @@
 				battery,cisd_max_voltage_thr = <4400>; /* battery ovp detection voltage */
 
 				battery,cisd_alg_index = <8>;
-				battery,ignore_cisd_index = <0 640>; /* Do not use BUCK_OFF, DROP_SENSOR*/
+				battery,ignore_cisd_index = <0 0>; /* Do not use BUCK_OFF, DROP_SENSOR*/
 				battery,ignore_cisd_index_d = <0 80>; /* Do not use BUCK_OFF_PER_DAY, DROP_SENSOR_PER_DAY */
 
 				battery,tx_stop_capacity = <30>;
@@ -324,6 +325,8 @@
 				battery,tx_mfc_iout_phone = <1100>;
 				battery,tx_mfc_iout_phone_5v = <300>;
 				battery,tx_mfc_iout_lcd_on = <900>;
+
+				battery,support_unknown_wpcthm;
 
 				io-channels = <&exynos_adc 4>, <&exynos_adc 3>, <&exynos_adc 11>, <&exynos_adc 4>, <&exynos_adc 1>;
 				io-channel-names = "adc-temp", "adc-chg-temp", "adc-in-bat", "adc-wpc-temp", "adc-usb-temp";
@@ -339,7 +342,7 @@
 				fuelgauge,capacity_max = <1000>;
 				fuelgauge,capacity_max_margin = <300>;
 				fuelgauge,capacity_min = <0>;
-				fuelgauge,capacity_calculation_type = <28>;
+				fuelgauge,capacity_calculation_type = <92>;
 				fuelgauge,repeated_fuelalert;
 				fuelgauge,using_temp_compensation;
 				fuelgauge,low_temp_limit = <100>;
@@ -351,103 +354,45 @@
 				fuelgauge,sw_v_empty_recover_voltage = <3480>;
 				fuelgauge,fg_resistor = <2>;
 				fuelgauge,capacity = <0x0CE2>;
+				/* fullcapnom(=capacity), dPacc, dQacc,  rcomp0, tempco */
+				fuelgauge,fg_reset_wa_data = <0xCE2 0x3200 0x338 0x36 0x151F>;
 				/*fuelgauge,auto_discharge_en;*/
 				fuelgauge,discharge_temp_threshold = <600>;
 				fuelgauge,discharge_volt_threshold = <4200>;
-				fuelgauge,ttf_capacity = <3325>;
+
+				fuelgauge,lost_soc_trig_soc = <1000>; /* 100.0% */
+				fuelgauge,lost_soc_trig_d_soc = <20>; /* 2% */
+				fuelgauge,lost_soc_trig_scale = <2>; /* 2x */
+				fuelgauge,lost_soc_guarantee_soc = <30>; /* 3.0% */
+				fuelgauge,lost_soc_min_vol = <3200>; /* 3200mV */
+
+				fuelgauge,ttf_capacity = <3000>;
 				fuelgauge,cv_data = <
-					2488	809	1809
-					2409	812	1796
-					2327	817	1769
-					2272	820	1743
-					2182	826	1721
-					2104	830	1690
-					2038	834	1670
-					1950	839	1640
-					1904	841	1622
-					1838	845	1594
-					1797	847	1576
-					1749	850	1560
-					1683	853	1531
-					1660	855	1525
-					1653	856	1515
-					1615	858	1512
-					1580	860	1509
-					1553	861	1502
-					1544	862	1483
-					1520	863	1463
-					1477	866	1458
-					1431	868	1451
-					1396	871	1424
-					1347	874	1409
-					1299	876	1383
-					1267	878	1361
-					1231	882	1332
-					1202	884	1315
-					1148	886	1288
-					1109	889	1263
-					1067	891	1243
-					1031	894	1213
-					1013	895	1185
-					975	897	1156
-					961	899	1140
-					921	901	1111
-					892	903	1084
-					887	903	1064
-					863	905	1038
-					833	907	1019
-					808	909	1004
-					787	910	976
-					764	912	946
-					744	914	918
-					730	915	904
-					715	916	895
-					693	917	864
-					681	918	846
-					666	920	828
-					651	921	800
-					640	922	783
-					628	925	752
-					622	926	735
-					618	927	712
-					600	930	697
-					596	931	679
-					584	933	664
-					576	936	646
-					577	937	627
-					562	938	614
-					511	948	601
-					505	949	572
-					493	951	553
-					492	952	535
-					484	953	506
-					480	955	487
-					474	956	464
-					462	957	435
-					456	958	417
-					452	959	398
-					446	961	380
-					437	962	364
-					429	964	355
-					423	965	336
-					422	966	329
-					414	967	303
-					411	968	282
-					405	969	255
-					397	970	242
-					391	971	229
-					387	972	211
-					384	973	199
-					372	975	191
-					364	977	171
-					356	978	140
-					350	981	126
-					340	985	107
-					335	988	84
-					327	991	54
-					320	995	26
-					313	998	13
-					0	1000	0
+					2481	762	1914
+					2229	783	1801
+					2052	803	1690
+					1824	818	1589
+					1724	833	1492
+					1500	847	1387
+					1390	861	1256
+					1322	874	1129
+					1207	885	1039
+					1094	895	919
+					1022	904	807
+					875	913	709
+					817	918	611
+					758	926	512
+					705	934	465
+					655	936	420
+					636	939	371
+					624	941	323
+					608	942	293
+					598	948	266
+					588	953	219
+					568	959	199
+					544	977	132
+					542	999	20
+					539	1000	0
 					>;
 			};
 
@@ -572,7 +517,7 @@
 					vout = <5500>;
 					input_current_limit = <800>;
 					fast_charging_current = <2400>;
-					ttf_charge_current = <910>;
+					ttf_charge_current = <860>;
 					rx_power = <4500>;
 				};
 				current_group_1 {
@@ -580,7 +525,7 @@
 					vout = <10000>;
 					input_current_limit = <650>;
 					fast_charging_current = <2400>;
-					ttf_charge_current = <1125>;
+					ttf_charge_current = <1250>;
 					rx_power = <7500>;
 				};
 				current_group_2 {
@@ -670,6 +615,8 @@
 		battery,fod_data_cv = <150 94 142 84 150 66 150 63 155 50 156 49>;
 		battery,fod_hero_5v_data = <150 2 142 (-6) 150 (-20) 150 (-28) 165 185 156 (-39)>;
 		battery,wc_cover_rpp = <0x44>;
+		battery,oc_fod1 = <1100>;
+		battery,tx_gear_min_op_freq_delay = <4000>;
 		battery,phone_fod_threshold = <0x3b>;
 		battery,wireless20_vout_list = <9>; /* WIRELESS_VOUT_10V */
 		battery,wireless20_vrect_list = <10>; /* MFC_AFC_CONF_12V_TX */

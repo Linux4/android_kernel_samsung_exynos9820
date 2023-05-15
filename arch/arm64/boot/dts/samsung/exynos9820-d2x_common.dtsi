@@ -2741,6 +2741,18 @@ expander_reset_active: expander_reset_active {
 		samsung,area = <1>;
 		samsung,offset = <0x68e800>;
 	};
+	ext_bin_18: ext-bin@12 {
+		status = "okay";
+		samsung,name = "txse3.bin";
+		samsung,area = <1>;
+		samsung,offset = <0x1b33800>;
+	};
+	ext_bin_19: ext-bin@13 {
+		status = "okay";
+		samsung,name = "APTV_AUDIO_SLSI.bin";
+		samsung,area = <1>;
+		samsung,offset = <0x15f5000>;
+	};
 };
 
 &vts {
@@ -2750,5 +2762,5 @@ expander_reset_active: expander_reset_active {
 };
 
 &abox_rmem {
-	size = <0x3c00000>;
+	size = <0x4000000>;
 };
