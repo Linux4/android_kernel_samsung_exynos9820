@@ -13,7 +13,7 @@
  * published by the Free Software Foundation.
  */
 
-#include <dt-bindings/clock/exynos9825.h>
+#include <dt-bindings/clock/exynos9820.h>
 
 / {
 	debug-snapshot-soc {
