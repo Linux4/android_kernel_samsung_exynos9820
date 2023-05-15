@@ -20,20 +20,20 @@
 #include <dt-bindings/soc/samsung/exynos-bcm_dbg.h>
 #include <dt-bindings/display/exynos-display.h>
 #include "exynos9825-pinctrl.dtsi"
-#include "exynos9825-rmem.dtsi"
-#include "exynos9825-sysmmu.dtsi"
-#include "exynos9825-debug.dtsi"
+#include "exynos9820-rmem.dtsi"
+#include "exynos9820-sysmmu.dtsi"
+#include "exynos9820-debug.dtsi"
 #include <dt-bindings/ufs/ufs.h>
 #include <dt-bindings/soc/samsung/exynos9820-dm.h>
-#include "exynos9825-pm-domains.dtsi"
+#include "exynos9820-pm-domains.dtsi"
 #include <dt-bindings/soc/samsung/exynos9820-devfreq.h>
 #include <dt-bindings/thermal/thermal.h>
 #include <dt-bindings/pci/pci.h>
 #include "exynos9825-camera.dtsi"
 #include <dt-bindings/soc/samsung/exynos-emc.h>
-#include "exynos9825-pmucal-dbg.dtsi"
-#include "exynos9825-mfc.dtsi"
-#include "exynos9825-mali_common.dtsi"
+#include "exynos9820-pmucal-dbg.dtsi"
+#include "exynos9820-mfc.dtsi"
+#include "exynos9820-mali_common.dtsi"
 #include "exynos_perf_ncmemcpy.dtsi"
 
 / {
