@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
-#include "exynos9820-mipi-dsi-freq.dtsi"
+#include "exynos9825-mipi-dsi-freq.dtsi"
 
 / {
 	fragment@lcd {

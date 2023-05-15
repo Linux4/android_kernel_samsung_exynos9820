@@ -13,7 +13,7 @@
 #include "../exynos/exynos9825-universal9825_if-pmic-max77705.dtsi"
 #include <dt-bindings/clock/exynos9820.h>
 #include <dt-bindings/pci/pci.h>
-#include "exynos_gpio_config_macros.dtsi"
+#include "exynos9825_gpio_config_macros.dtsi"
 #include "exynos9825-m62_input_common.dtsi"
 #include "exynos9825-m62_vibrator.dtsi"
 #include "exynos9825-argos.dtsi"
