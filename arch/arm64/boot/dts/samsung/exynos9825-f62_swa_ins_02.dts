@@ -11,8 +11,8 @@
 
 /dts-v1/;
 /plugin/;
-#include "../exynos/modem-s5000ap-sipc-pdata.dtsi"
-#include "../exynos/exynos9825-mali_rev2.dtsi"
+#include "modem-s5000ap-sipc-pdata.dtsi"
+#include "exynos9820-mali_rev2.dtsi"
 #include "exynos9825-m62_fingerprint_00.dtsi"
 #include "exynos9825-m62_pm_00.dtsi"
 #include "exynos9825-m62_common.dtsi"
@@ -20,7 +20,7 @@
 #include "exynos9825-sensorhub.dtsi"
 #include "exynos9825-f62_grip_00.dtsi"
 #include "exynos9825-f62_abc.dtsi"
-#include "exynos9825_gpio_config_macros.dtsi"
+#include "exynos_gpio_config_macros.dtsi"
 #include "battery_data_f62-r02.dtsi"
 #include "exynos9825-nfc_00.dtsi"
 / {
