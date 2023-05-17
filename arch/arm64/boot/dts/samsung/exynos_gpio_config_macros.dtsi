@@ -26,6 +26,15 @@
 #define PIN_PDN_INPUT		2
 #define PIN_PDN_PREV		3
 
+#define PIN_IN_SLP(_pin, _pull, _slp_mode, _slp_pull)		\
+	_pin {							\
+		samsung,pins = #_pin;				\
+		samsung,pin-function = <0>;			\
+		samsung,pin-pud = <PIN_PULL_ ##_pull>;		\
+		samsung,pin-con-pdn = <PIN_PDN_ ##_slp_mode>;	\
+		samsung,pin-pud-pdn = <PIN_PULL_ ##_slp_pull>;	\
+	}
+
 #define PIN_IN(_pin, _pull)				\
 	_pin {						\
 		samsung,pins = #_pin;			\
