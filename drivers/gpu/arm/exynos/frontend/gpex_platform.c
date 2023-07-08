@@ -46,7 +46,7 @@
 
 static struct exynos_context platform;
 
-struct exynos_context *gpex_platform_get_context()
+struct exynos_context *gpex_platform_get_context(void)
 {
 	return &platform;
 }
