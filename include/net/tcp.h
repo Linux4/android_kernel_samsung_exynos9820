@@ -306,7 +306,6 @@ extern int sysctl_tcp_autocorking;
 extern int sysctl_tcp_invalid_ratelimit;
 extern int sysctl_tcp_pacing_ss_ratio;
 extern int sysctl_tcp_pacing_ca_ratio;
-extern int sysctl_tcp_default_init_rwnd;
 #ifdef CONFIG_NETPM
 extern int sysctl_tcp_netpm[4];
 extern struct net_device *ip6_dev_find(struct net *net, const struct in6_addr *addr);
