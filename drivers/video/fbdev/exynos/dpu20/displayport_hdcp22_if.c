@@ -110,7 +110,7 @@ void reset_dp_hdcp_module(void)
 			&displayport->hpd_unplug_work, 0);
 }
 
-int displayport_hdcp22_authenticate()
+int displayport_hdcp22_authenticate(void)
 {
 #ifdef CONFIG_HDCP2_FUNC_TEST_MODE
 	displayport_info("HDCP22 DRM Always On.\n");
