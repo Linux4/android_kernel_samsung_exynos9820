@@ -191,7 +191,7 @@ out:
 	return result;
 }
 extern int tz_tee_ese_secure_check(void);
-int tz_tee_ese_secure_check()
+int tz_tee_ese_secure_check(void)
 {
 	return	tz_tee_ese_drv(SECURE_CHECK);
 }
