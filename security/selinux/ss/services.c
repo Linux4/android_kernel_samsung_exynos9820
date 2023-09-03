@@ -1346,6 +1346,32 @@ out:
 
 }
 
+// based on security_sid_to_context_core() above
+int security_sid_to_context_type(struct selinux_state *state, u32 sid, u32 *out)
+{
+	struct sidtab *sidtab;
+	struct context *context;
+	int rc = 0;
+
+	read_lock(&state->ss->policy_rwlock);
+	sidtab = state->ss->sidtab;
+
+	context = sidtab_search(sidtab, sid);
+
+	if (!context) {
+		pr_err("SELinux: %s:  unrecognized SID %d\n",
+			__func__, sid);
+		rc = -EINVAL;
+		goto out_unlock;
+	}
+
+	*out = context->type;
+
+out_unlock:
+	read_unlock(&state->ss->policy_rwlock);
+	return rc;
+}
+
 /**
  * security_sid_to_context - Obtain a context for a given SID.
  * @sid: security identifier, SID
