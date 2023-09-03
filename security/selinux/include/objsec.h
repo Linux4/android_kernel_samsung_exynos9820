@@ -36,7 +36,10 @@ struct task_security_struct {
 	u32 create_sid;		/* fscreate SID */
 	u32 keycreate_sid;	/* keycreate SID */
 	u32 sockcreate_sid;	/* fscreate SID */
+    u64 flags;
 };
+
+#define TSEC_ALL_FLAGS (0)
 
 /*
  * get the subjective security ID of the current task

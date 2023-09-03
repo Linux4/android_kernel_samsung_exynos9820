@@ -2675,6 +2675,7 @@ static const struct file_operations proc_pid_attr_operations = {
 
 static const struct pid_entry attr_dir_stuff[] = {
 	REG("current",    S_IRUGO|S_IWUGO, proc_pid_attr_operations),
+	REG("selinux_flags",    S_IRUGO|S_IWUGO, proc_pid_attr_operations),
 	REG("prev",       S_IRUGO,	   proc_pid_attr_operations),
 	REG("exec",       S_IRUGO|S_IWUGO, proc_pid_attr_operations),
 	REG("fscreate",   S_IRUGO|S_IWUGO, proc_pid_attr_operations),
