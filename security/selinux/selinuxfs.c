@@ -41,6 +41,8 @@
 #include "security.h"
 #include "objsec.h"
 #include "conditional.h"
+#include "ss/services.h"
+#include "ss/symtab.h"
 
 enum sel_inos {
 	SEL_ROOT_INO = 2,
@@ -528,6 +530,30 @@ static int sel_make_policy_nodes(struct selinux_fs_info *fsi)
 	return 0;
 }
 
+static int resolve_context_type(struct policydb *policydb, const char *name, u32 *out_type)
+{
+	struct type_datum *typdatum = hashtab_search(policydb->p_types.table, name);
+	if (!typdatum || typdatum->attribute) {
+		pr_err("SELinux: missing type_datum for %s\n", name);
+		return -EINVAL;
+	}
+	*out_type = typdatum->value;
+	return 0;
+}
+
+static int resolve_context_types(struct policydb *policydb, struct context_types *types) {
+	int rc;
+
+#define RESOLVE_TYPE(t) rc = resolve_context_type(policydb, #t, &types->t); if (rc) return rc
+
+	RESOLVE_TYPE(webview_zygote);
+	RESOLVE_TYPE(zygote);
+
+#undef RESOLVE_TYPE
+
+	return 0;
+}
+
 static ssize_t sel_write_load(struct file *file, const char __user *buf,
 			      size_t count, loff_t *ppos)
 
@@ -571,6 +597,11 @@ static ssize_t sel_write_load(struct file *file, const char __user *buf,
 	length = sel_make_policy_nodes(fsi);
 	if (length)
 		goto out1;
+
+	length = resolve_context_types(&fsi->state->ss->policydb, &fsi->state->types);
+	if (length) {
+		goto out1;
+	}
 
 	length = count;
 

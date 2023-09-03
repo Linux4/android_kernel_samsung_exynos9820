@@ -96,6 +96,11 @@ extern const char *selinux_policycap_names[__POLICYDB_CAPABILITY_MAX];
 struct selinux_avc;
 struct selinux_ss;
 
+struct context_types {
+	u32 webview_zygote;
+	u32 zygote;
+};
+
 struct selinux_state {
 	bool disabled;
 #ifdef CONFIG_SECURITY_SELINUX_DEVELOP
@@ -106,6 +111,8 @@ struct selinux_state {
 	bool policycap[__POLICYDB_CAPABILITY_MAX];
 	bool android_netlink_route;
 	bool android_netlink_getneigh;
+
+	struct context_types types;
 
 	struct selinux_avc *avc;
 	struct selinux_ss *ss;
