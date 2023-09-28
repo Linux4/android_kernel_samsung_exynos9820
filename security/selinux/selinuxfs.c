@@ -550,6 +550,7 @@ static int resolve_context_types(struct policydb *policydb, struct context_types
 	RESOLVE_TYPE(appdomain_tmpfs);
 	RESOLVE_TYPE(ashmem_device);
 	RESOLVE_TYPE(ashmem_libcutils_device);
+	RESOLVE_TYPE(crash_dump);
 	RESOLVE_TYPE(privapp_data_file);
 	RESOLVE_TYPE(webview_zygote);
 	RESOLVE_TYPE(zygote);
