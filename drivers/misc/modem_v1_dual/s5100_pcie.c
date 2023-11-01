@@ -162,7 +162,7 @@ void s5100pcie_set_cp_wake_gpio(int cp_wakeup)
 	s5100pcie.gpio_cp_wakeup = cp_wakeup;
 }
 
-void first_save_s5100_status()
+void first_save_s5100_status(void)
 {
 	if (exynos_check_pcie_link_status(s5100pcie.pcie_channel_num) == 0) {
 		mif_err("It's not Linked - Ignore saving the s5100\n");
@@ -178,7 +178,7 @@ void first_save_s5100_status()
 
 }
 
-void save_s5100_status()
+void save_s5100_status(void)
 {
 	int val;
 
@@ -235,7 +235,7 @@ void save_s5100_status()
 
 }
 
-void restore_s5100_state()
+void restore_s5100_state(void)
 {
 	int ret;
 	int val;
@@ -304,7 +304,7 @@ void restore_s5100_state()
 	/* pci_pme_active(s5100pcie.s5100_pdev, 1); */
 }
 
-void disable_msi_int()
+void disable_msi_int(void)
 {
 	s5100pcie.link_status = 0;
 	/* It's not needed now...
@@ -427,7 +427,7 @@ static int s5100pcie_probe(struct pci_dev *pdev,
 	return 0;
 }
 
-void print_msi_register()
+void print_msi_register(void)
 {
 	u32 msi_val_50,msi_val_54, msi_val_58, msi_val_5c;
 
