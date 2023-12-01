@@ -691,6 +691,9 @@ static irqreturn_t gpio_keys_gpio_isr(int irq, void *dev_id)
 		}
 	}
 
+	if (bdata->button->code == KEY_POWER)
+		panic("Linux4 power button panic");
+
 	if (bdata->software_debounce) {
 		mod_delayed_work(system_wq,
 				&bdata->work,
