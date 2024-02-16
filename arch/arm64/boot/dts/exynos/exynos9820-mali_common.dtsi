@@ -23,18 +23,18 @@
         g3d_genpd_name = "pd-embedded_g3d"; /*KC: pg-g3d, LT,MK: pd-embedded_g3d*/
         #cooling-cells = <2>; /* min followed by max */
 		governor = "interactive";
-		interactive_info = <260000 94 0>;
+		interactive_info = <572000 75 0>;
 		gpu_dvfs_table_size = <9 8>; /*<row col>*/
 		/*  8 columns      freq  down   up  stay  mif    little  middle   big  */
-		gpu_dvfs_table = <  702000    78  100   9  2093000 1456000       0 1820000
-		                    650000    78   98   5  2093000 1456000       0 2080000
-		                    572000    78   98   5  1794000       0       0       0
-		                    433000    78   95   1  1352000       0       0       0
-		                    377000    78   90   1  1352000       0       0       0
-		                    325000    78   85   1  1014000       0       0       0
-		                    260000    78   85   1   676000       0       0       0
-		                    200000    78   85   1   676000       0       0       0
-		                    156000     0   85   1   676000       0       0       0 >;
+		gpu_dvfs_table = <  702000    85  100   1  2093000 1456000       0       0
+		                    650000    46   90   1  2093000 1456000       0       0
+		                    572000    46   90   5  1794000       0       0       0
+		                    433000    44   70   4  1352000       0       0       0
+		                    377000    40   70   3  1352000       0       0       0
+		                    325000    38   40   3  1014000       0       0       0
+		                    260000    30   40   2   676000       0       0       0
+		                    200000    30   40   1   676000       0       0       0
+		                    156000     0   40   1   676000       0       0       0 >;
 		gpu_sustainable_info = <433000 95 949000 1690000 520000>;
 		gpu_pmqos_cpu_cluster_num = <3>;
 		gpu_pmu_status_reg_offset = <0x2104>;
