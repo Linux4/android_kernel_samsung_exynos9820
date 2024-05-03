@@ -69,7 +69,8 @@
 /* static reserved memory for libraries */
 #define CDH_SIZE		SZ_128K		/* CDH : Camera Debug Helper */
 
-#define LIB_OFFSET		(VMALLOC_START + 0xF6000000 - 0x8000000)
+#define LIB_OFFSET		((((((((0xffffffffffffffffUL))) - ((((1UL))) << (39)) + 1) + (0)) + (0x08000000))) + 0xF6000000 - 0x8000000)
+//#define LIB_OFFSET		(VMALLOC_START + 0xF6000000 - 0x8000000)
 #define __LIB_START		(LIB_OFFSET + 0x04000000 - CDH_SIZE)
 #define LIB_START		(__LIB_START)
 
