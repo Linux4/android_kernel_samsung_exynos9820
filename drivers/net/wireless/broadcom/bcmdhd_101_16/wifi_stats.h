@@ -28,6 +28,8 @@
 // remove the conditional after moving all branches to use the new code
 #ifdef USE_WIFI_STATS_H
 
+#define NUM_RATE 32
+
 #include <ethernet.h>
 #include <802.11.h>
 
@@ -261,7 +263,7 @@ typedef struct {
 	uint32 capabilities;              /* peer WIFI_CAPABILITY_XXX */
 	bssload_info_t bssload;		/* STA count and CU */
 	uint32 num_rate;                  /* number of rates */
-	wifi_rate_stat rate_stats[1];   /* per rate statistics, number of entries  = num_rate */
+	wifi_rate_stat_v1 rate_stats[NUM_RATE];   /* per rate statistics, number of entries  = num_rate */
 } wifi_peer_info;
 
 /* per access category statistics */
