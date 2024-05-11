@@ -1508,8 +1508,6 @@ static int __ref _cpus_up(struct cpumask cpus, int tasks_frozen,
 	}
 
 	cpuset_update_active_cpus();
-	for_each_cpu(cpu, &bringup_cpus)
-		sched_cpu_rq_online(cpu);
 
 	for_each_cpu(cpu, &bringup_cpus) {
 		st = per_cpu_ptr(&cpuhp_state, cpu);

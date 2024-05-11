@@ -20,7 +20,9 @@
 #include <linux/pm_opp.h>
 #include <linux/cpu_cooling.h>
 #include <linux/suspend.h>
+#ifdef CONFIG_SCHED_EMS
 #include <linux/ems.h>
+#endif
 
 #include <soc/samsung/cal-if.h>
 #include <soc/samsung/exynos-dm.h>
@@ -675,8 +677,10 @@ static int exynos_cpufreq_pm_qos_callback(struct notifier_block *nb,
 	if (!policy)
 		return NOTIFY_BAD;
 
+#ifdef CONFIG_SCHED_EMS
 	if (pm_qos_class == domain->pm_qos_max_class)
 		update_qos_capacity(cpumask_first(&domain->cpus), val, policy->cpuinfo.max_freq);
+#endif
 
 	ret = need_update_freq(domain, pm_qos_class, val);
 	if (ret < 0)
@@ -1098,8 +1102,10 @@ static __init int init_table(struct exynos_cpufreq_domain *domain)
 	domain->freq_table[index].driver_data = index;
 	domain->freq_table[index].frequency = CPUFREQ_TABLE_END;
 
+#ifdef CONFIG_SCHED_EMS
 	init_sched_energy_table(&domain->cpus, domain->table_size, table, volt_table,
 				domain->max_freq, domain->min_freq);
+#endif
 
 	kfree(volt_table);
 
@@ -1549,7 +1555,9 @@ static int __init exynos_cpufreq_init(void)
 		set_boot_qos(domain);
 	}
 
+#ifdef CONFIG_SCHED_EMS
 	set_energy_table_status(true);
+#endif
 
 	pr_info("Initialized Exynos cpufreq driver\n");
 

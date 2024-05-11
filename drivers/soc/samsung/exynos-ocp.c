@@ -28,7 +28,9 @@
 
 #include "../../../kernel/sched/sched.h"
 #include "../../cpufreq/exynos-acme.h"
+#ifdef CONFIG_SCHED_EMS
 #include "../../../kernel/sched/ems/ems.h"
+#endif
 
 #define GCU_BASE_ADDR			(0x1E4C0000)
 
@@ -202,6 +204,14 @@ static void set_ocp_max_limit(unsigned int down_step)
 #define BUCK2_COEFF			(46875)
 #define ONE_HUNDRED			(100)
 
+#ifndef CONFIG_SCHED_EMS
+#ifdef CONFIG_SCHED_TUNE
+extern unsigned long boosted_cpu_util(int cpu);
+#else
+extern unsigned long cpu_util_freq(int cpu);
+#endif
+#endif
+
 /*
  * Check BPC condition based on currentmeter information.
  * If current value of big cluster is lower than configured current value,
@@ -236,7 +246,15 @@ static bool is_cpuutil_condition(void)
 	capacity = capacity_orig_of(data->cpu);
 
 	for_each_cpu(cpu, &data->cpus) {
+#ifdef CONFIG_SCHED_EMS
 		util += ml_cpu_util(cpu);
+#else
+#ifdef CONFIG_SCHED_TUNE
+		util += boosted_cpu_util(cpu);
+#else
+		util += cpu_util_freq(cpu);
+#endif
+#endif
 		count++;
 	}
 
