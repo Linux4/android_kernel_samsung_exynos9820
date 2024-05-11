@@ -206,7 +206,7 @@ static void set_ocp_max_limit(unsigned int down_step)
 
 #ifndef CONFIG_SCHED_EMS
 #ifdef CONFIG_SCHED_TUNE
-extern unsigned long boosted_cpu_util(int cpu);
+extern unsigned long stune_util(int cpu);
 #else
 extern unsigned long cpu_util_freq(int cpu);
 #endif
@@ -250,7 +250,7 @@ static bool is_cpuutil_condition(void)
 		util += ml_cpu_util(cpu);
 #else
 #ifdef CONFIG_SCHED_TUNE
-		util += boosted_cpu_util(cpu);
+		util += stune_util(cpu);
 #else
 		util += cpu_util_freq(cpu);
 #endif
